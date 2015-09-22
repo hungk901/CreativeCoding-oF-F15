@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>D0E8D504-CE55-4603-91DB-57A145990D7C</string>
+	<string>CBA3103A-741C-4D19-9912-B6C121091A61</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>Leaf</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>F49D35AD163AA38EE09C75299D061E5BEE56E120</key>
 		<string>https://github.com/hungk901/CreativeCoding_oF_F15_KuoJui_Hung.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Week2_Leaf/Leaf/Leaf.xcodeproj/project.xcworkspace</string>
+	<string>Week2_Leaf/Leaf/Leaf.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>F49D35AD163AA38EE09C75299D061E5BEE56E120</key>

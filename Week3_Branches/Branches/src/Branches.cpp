@@ -23,8 +23,9 @@ void Branches::setup(
                   float _curvature,
                   ofColor _color)
 {
+    
     ofPushMatrix();
- 
+    
     
     //-------1. Set Up Variables-------//
     xPos = _xPos;
@@ -58,7 +59,7 @@ void Branches::setup(
     xPos += length*cos(angle);
     yPos += length*sin(angle);
     width = width*ofRandom(0.7, 0.9);
-    length = length*ofRandom(1.0, 1.25);
+    length = length*ofRandom(1.1, 1.3);
     segmentsSinceStart += 1;
     angle += curvature;
     curvature += ofRandom(0, (float)(2*PI)/360.0);
@@ -94,6 +95,7 @@ void Branches::setup(
             subBranch_2.setup(xPos, yPos, width, length, splitPercentage, maxSubdivisions, maxSegments, segmentsSinceStart, angle_2, curvature, color);
         }
     }
+    
     ofPopMatrix();
 }
 

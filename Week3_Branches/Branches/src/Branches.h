@@ -10,6 +10,7 @@
 #define __Branches__Branches__
 
 #include "ofMain.h"
+#include "Leaf.h"
 
 class Branches : public ofBaseApp{
 
@@ -42,6 +43,8 @@ class Branches : public ofBaseApp{
         float angle;    // It is Radians(using PI) in Code but not Degrees.
         float curvature;    // To Bend Branches.
         ofColor color;
+    
+        Leaf myLeaf;
     
 };
 

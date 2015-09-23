@@ -2,7 +2,12 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    
     ofSetBackgroundAuto(false);
+    ofSetRectMode(OF_RECTMODE_CENTER);
+    ofEnableSmoothing();
+    ofEnableAlphaBlending();
+    
 }
 
 //--------------------------------------------------------------
@@ -40,12 +45,12 @@ void ofApp::mousePressed(int x, int y, int button){
     
     ofBackground(250, 250, 250);
     myBranches.setup(ofGetWidth()/2,
-                     ofGetHeight()/2,
+                     0,
                      40, 40,
                      0.3,
-                     2, 8, 0,
+                     2, 5, 0,
                      PI/2, 0,
-                     ofColor(150, 50, 20));
+                     ofColor(130, 50, 20));
     
     /*branches.setup(float _xPos,
                     float _yPos,

@@ -23,6 +23,8 @@ void Branches::setup(
                   float _curvature,
                   ofColor _color)
 {
+    ofPushMatrix();
+ 
     
     //-------1. Set Up Variables-------//
     xPos = _xPos;
@@ -36,25 +38,32 @@ void Branches::setup(
     angle = _angle;
     curvature = _curvature;
     color = _color;
+    
+    myLeaf.setup();
+    
 
     //-------2. Draw Lines-------//
-    
     ofSetColor(color);
     ofSetLineWidth((int)width);
     ofLine(xPos, yPos, xPos+length*cos(angle), yPos+length*sin(angle));
     
+    /*
     cout << "width=" << width << ", length=" << length<< endl;
     cout <<  "xPos=" << xPos << ",yPos=" << yPos << endl;
     cout <<  "xPos2=" << xPos+length*cos(angle) <<  ",yPos2=" << yPos+length*sin(angle) << endl<<endl;
+    */
     
  
     //-------3. Update Variables before Pass them to Sub-Branches-------//
     xPos += length*cos(angle);
     yPos += length*sin(angle);
     width = width*ofRandom(0.7, 0.9);
+    length = length*ofRandom(1.0, 1.25);
     segmentsSinceStart += 1;
     angle += curvature;
     curvature += ofRandom(0, (float)(2*PI)/360.0);
+    
+    myLeaf.draw(xPos, yPos);
     
     
     //-------4. Recursion of Building Branches-------//
@@ -85,6 +94,7 @@ void Branches::setup(
             subBranch_2.setup(xPos, yPos, width, length, splitPercentage, maxSubdivisions, maxSegments, segmentsSinceStart, angle_2, curvature, color);
         }
     }
+    ofPopMatrix();
 }
 
 //--------------------------------------------------------------

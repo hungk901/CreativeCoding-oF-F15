@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-
+    ofSetBackgroundAuto(false);
 }
 
 //--------------------------------------------------------------
@@ -37,6 +37,27 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
+    
+    ofBackground(250, 250, 250);
+    myBranches.setup(ofGetWidth()/2,
+                     ofGetHeight()/2,
+                     40, 40,
+                     0.3,
+                     2, 8, 0,
+                     PI/2, 0,
+                     ofColor(150, 50, 20));
+    
+    /*branches.setup(float _xPos,
+                    float _yPos,
+                    float _width, 
+                    float _length,
+                    float _splitPercentage,
+                    float _maxSubdivisions,
+                    float _maxSegments,
+                    float _segmentsSinceStart,
+                    float _angle,
+                    float _curvature,
+                    ofColor _color);*/
 
 }
 

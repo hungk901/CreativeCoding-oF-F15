@@ -25,7 +25,7 @@ void Leaf::setup(){
     
     fruitXPosOne = ofRandom(0, stemWidth+fruitRadiusOne/2);
     fruitYPosOne = ofRandom((3*stemHeight)/4, stemHeight);
-    fruitXPosOne = ofRandom(0, stemWidth+fruitRadiusTwo/2);
+    fruitXPosTwo = ofRandom(0, stemWidth+fruitRadiusTwo/2);
     fruitYPosTwo = ofRandom((3*stemHeight)/4, stemHeight);
     
     rotation = ofRandom(120, 250);

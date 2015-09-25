@@ -28,7 +28,7 @@ void Leaf::setup(){
     fruitXPosTwo = ofRandom(0, stemWidth+fruitRadiusTwo/2);
     fruitYPosTwo = ofRandom((3*stemHeight)/4, stemHeight);
     
-    rotation = ofRandom(-60, 60);
+    rotation = ofRandom(135, 225);
     
     leafColorLeft = ofColor(ofRandom(0, 20), ofRandom(150, 255), ofRandom(0, 20), ofRandom(200, 225));
     leafColorRight = ofColor(ofRandom(0, 20), ofRandom(150, 255), ofRandom(0, 20), ofRandom(200, 225));
@@ -48,24 +48,29 @@ void Leaf::update(){
 //--------------------------------------------------------------
 void Leaf::draw(float _xPos, float _yPos){
     
-    // DRAW LEAF / STEM / FRUIT
+    //--------------------------//
+    // DRAW LEAF / STEM / FRUIT //
+    //--------------------------//
     
-    ofPushMatrix();
+    ofPushMatrix(); // Keep "Leaf" as a pack and Prevent it from changeing by other factors.
+    ofPushStyle();  // Keep "Leaf" style(i.e ofSetLineWidth).
     
     xPos = _xPos;
     yPos = _yPos;
     
     ofTranslate(xPos, yPos);    // Set Center Point to xPos and yPos.
     
-    //------0. Do Rotation and Scale------//
+    
+    //------0. Do Rotation, Scale and Set Line Width------//
     ofRotateZ(rotation);
     ofScale(scaleFactor, scaleFactor);
+    ofSetLineWidth(0);  // Line Width could be effected by Branch's Width, set it to 0.
     
     
     //------1. Draw Left Leaf------//
     ofBeginShape();
     ofSetColor(leafColorLeft);  // Set Color Green to Leaf.
-    
+
     
     // Set x Values of Bezier
     float x0 = 0;
@@ -126,10 +131,11 @@ void Leaf::draw(float _xPos, float _yPos){
     ofCircle(fruitXPosTwo, fruitYPosTwo, fruitRadiusTwo);
     
      
-    //-----7. Draw Root
+    //-----7. Draw Root-----//
     ofSetColor(stemColor);
     ofCircle(0, 0, stemWidth/2);
     
+    ofPopStyle();
     ofPopMatrix();
     
 }

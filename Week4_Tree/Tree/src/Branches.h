@@ -21,6 +21,7 @@ class Branches : public ofBaseApp{
                    float _width,
                    float _length,
                    float _splitPercentage,
+                   float _maxSplitAngle,
                    float _maxSubdivisions,
                    float _maxSegments,
                    float _segmentsSinceStart,
@@ -37,6 +38,7 @@ class Branches : public ofBaseApp{
         float width;    // Line Width.
         float length;   // Line Length.
         float splitPercentage;  // Branch Splits or not.
+        float maxSplitAngle;
         float maxSubdivisions;
         float maxSegments;
         float segmentsSinceStart;   // Segments Counter.
@@ -44,7 +46,8 @@ class Branches : public ofBaseApp{
         float curvature;    // To Bend Branches.
         ofColor color;
     
-        Leaf myLeaf;
+        int numLeaves;
+        vector<Leaf> myLeaves;
     
 };
 

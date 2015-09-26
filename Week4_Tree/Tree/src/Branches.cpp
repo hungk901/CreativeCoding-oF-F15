@@ -16,6 +16,7 @@ void Branches::setup(
                   float _width,
                   float _length,
                   float _splitPercentage,
+                  float _maxSplitAngle,
                   float _maxSubdivisions,
                   float _maxSegments,
                   float _segmentsSinceStart,
@@ -27,7 +28,10 @@ void Branches::setup(
     ofPushMatrix();
     
     
-    //-------1. Set Up Variables-------//
+    //-----------------------------------------------//
+    //-------1-1. Set Up Variables of Branches-------//
+    //-----------------------------------------------//
+    
     xPos = _xPos;
     yPos = _yPos;
     width = _width;
@@ -40,10 +44,31 @@ void Branches::setup(
     curvature = _curvature;
     color = _color;
     
-    myLeaf.setup();
     
-
-    //-------2. Draw Lines-------//
+    //---------------------------------------------//
+    //-------1-2. Set Up Variables of Leaves-------//
+    //---------------------------------------------//
+    
+    numLeaves = (int)ofRandom(2, 4);
+    
+    if (segmentsSinceStart == maxSegments) {
+        numLeaves = (int)ofRandom(5, 8);
+    }
+    if (segmentsSinceStart == 0) {
+        numLeaves = 0;
+    }
+    
+    for (int i = 0; i < numLeaves; i++) {
+        Leaf tempLeaf;
+        tempLeaf.setup();
+        myLeaves.push_back(tempLeaf);
+    }
+    
+    
+    //-----------------------------//
+    //-------2-1. Draw Lines-------//
+    //-----------------------------//
+    
     ofSetColor(color);
     ofSetLineWidth((int)width);
     ofLine(xPos, yPos, xPos+length*cos(angle), yPos+length*sin(angle));
@@ -54,7 +79,16 @@ void Branches::setup(
     cout <<  "xPos2=" << xPos+length*cos(angle) <<  ",yPos2=" << yPos+length*sin(angle) << endl<<endl;
     */
     
- 
+    
+    //------------------------------//
+    //-------2-2. Draw Leaves-------//
+    //-----------------------------//
+    
+    for (int i = 0; i < numLeaves; i++) {
+        myLeaves[i].draw(xPos, yPos);
+    }
+    
+    
     //-------3. Update Variables before Pass them to Sub-Branches-------//
     xPos += length*cos(angle);
     yPos += length*sin(angle);
@@ -63,8 +97,6 @@ void Branches::setup(
     segmentsSinceStart += 1;
     angle += curvature;
     curvature += ofRandom(0, (float)(2*PI)/360.0);
-    
-    myLeaf.draw(xPos, yPos);
     
     
     //-------4. Recursion of Building Branches-------//
@@ -78,7 +110,7 @@ void Branches::setup(
         if (ofRandom(0, 1) > splitPercentage){
             
             Branches subBranch;
-            subBranch.setup(xPos, yPos, width, length, splitPercentage, maxSubdivisions, maxSegments, segmentsSinceStart, angle, curvature, color);
+            subBranch.setup(xPos, yPos, width, length, splitPercentage, maxSplitAngle, maxSubdivisions, maxSegments, segmentsSinceStart, angle, curvature, color);
         }
         
         // Do Split and Create 2 Branches.
@@ -91,8 +123,8 @@ void Branches::setup(
             Branches subBranch_2;
             float angle_2 = angle+ofRandom(0, PI/3);
             
-            subBranch_1.setup(xPos, yPos, width, length, splitPercentage, maxSubdivisions, maxSegments, segmentsSinceStart, angle_1, curvature, color);
-            subBranch_2.setup(xPos, yPos, width, length, splitPercentage, maxSubdivisions, maxSegments, segmentsSinceStart, angle_2, curvature, color);
+            subBranch_1.setup(xPos, yPos, width, length, splitPercentage, maxSplitAngle, maxSubdivisions, maxSegments, segmentsSinceStart, angle_1, curvature, color);
+            subBranch_2.setup(xPos, yPos, width, length, splitPercentage, maxSplitAngle, maxSubdivisions, maxSegments, segmentsSinceStart, angle_2, curvature, color);
         }
     }
     

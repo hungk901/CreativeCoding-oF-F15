@@ -68,6 +68,10 @@ void Leaf::draw(float _xPos, float _yPos, int _season){
         leafColorRight = ofColor(ofRandom(200, 255), ofRandom(50, 150), ofRandom(0, 20), ofRandom(200, 225));
     }
     
+    if (season == 1) {
+        scaleFactor = ofRandom(0.5, 0.7);
+    }
+    
     ofTranslate(xPos, yPos);    // Set Center Point to xPos and yPos.
     
     
@@ -131,8 +135,6 @@ void Leaf::draw(float _xPos, float _yPos, int _season){
     ofBezierVertex(x1, y1, x2, y2, x3, y3);
     
     ofEndShape();
-        
-    }
     
     
     //---------------------------//
@@ -143,14 +145,15 @@ void Leaf::draw(float _xPos, float _yPos, int _season){
     ofRect(0, 0+stemHeight/2, stemWidth, stemHeight);
     
     
-    
     //---------------------------//
     //-----4. Draw Stem Head-----//
     //---------------------------//
     
     ofTriangle(0-stemWidth/2, 0+stemHeight, 0+stemWidth/2, 0+stemHeight, 0, 0+stemHeight+leafHeight/3);
     
-    
+    }
+
+
     // Season Summer, Fruits grow up.
     if (season == 2) {
     
@@ -171,12 +174,18 @@ void Leaf::draw(float _xPos, float _yPos, int _season){
         
     }
     
+    
+    // Season Winter, all Leaves die.
+    if (season != 4) {
+    
     //----------------------//
     //-----7. Draw Root-----//
     //----------------------//
     
     ofSetColor(stemColor);
     ofCircle(0, 0, stemWidth/2);
+        
+    }
     
     
     ofPopStyle();

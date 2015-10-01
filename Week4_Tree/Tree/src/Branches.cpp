@@ -52,8 +52,15 @@ void Branches::setup(
     //-------1-2. Set Up Variables of Leaves-------//
     //---------------------------------------------//
     
-    numLeaves = (int)ofRandom(2, 4);
+    //  Different Season, Different number of leaves.
+    if (season == 1) {
+        numLeaves = (int)ofRandom(1, 2);
+    }
+    else {
+        numLeaves = (int)ofRandom(2, 4);
+    }
     
+    //  No Leaves for first Branch; Last Branch has more Leaves.
     if (segmentsSinceStart == maxSegments) {
         numLeaves = (int)ofRandom(5, 8);
     }

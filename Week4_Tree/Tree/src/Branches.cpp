@@ -22,7 +22,8 @@ void Branches::setup(
                   float _segmentsSinceStart,
                   float _angle,
                   float _curvature,
-                  ofColor _color)
+                  ofColor _color,
+                  int _season)
 {
     
     ofPushMatrix();
@@ -37,12 +38,14 @@ void Branches::setup(
     width = _width;
     length = _length;
     splitPercentage = _splitPercentage;
+    maxSplitAngle = _maxSplitAngle;
     maxSubdivisions = _maxSubdivisions;
     maxSegments = _maxSegments;
     segmentsSinceStart = _segmentsSinceStart;
     angle = _angle;
     curvature = _curvature;
     color = _color;
+    season = _season;
     
     
     //---------------------------------------------//
@@ -79,13 +82,12 @@ void Branches::setup(
     cout <<  "xPos2=" << xPos+length*cos(angle) <<  ",yPos2=" << yPos+length*sin(angle) << endl<<endl;
     */
     
-    
     //------------------------------//
     //-------2-2. Draw Leaves-------//
     //-----------------------------//
     
     for (int i = 0; i < numLeaves; i++) {
-        myLeaves[i].draw(xPos, yPos);
+        myLeaves[i].draw(xPos+length*cos(angle), yPos+length*sin(angle), season);
     }
     
     
@@ -93,7 +95,7 @@ void Branches::setup(
     xPos += length*cos(angle);
     yPos += length*sin(angle);
     width = width*ofRandom(0.7, 0.9);
-    length = length*ofRandom(1.1, 1.3);
+    length = length*ofRandom(0.7, 0.9);
     segmentsSinceStart += 1;
     angle += curvature;
     curvature += ofRandom(0, (float)(2*PI)/360.0);
@@ -104,29 +106,33 @@ void Branches::setup(
     // If Segments don't exceed the Maximum,
     if (segmentsSinceStart <= maxSegments){
         
+        Branches subBranch;
+        subBranch.setup(xPos, yPos, width, length, splitPercentage, maxSplitAngle, maxSubdivisions, maxSegments, segmentsSinceStart, angle, curvature, color, season);
+        
         // Roll the Dice to determind if Branch Splits into 2 Branches.
         
         // Don't Split and Create 1 Branch.
         if (ofRandom(0, 1) > splitPercentage){
             
-            Branches subBranch;
-            subBranch.setup(xPos, yPos, width, length, splitPercentage, maxSplitAngle, maxSubdivisions, maxSegments, segmentsSinceStart, angle, curvature, color);
+            subBranch.setup(xPos, yPos, width, length, splitPercentage, maxSplitAngle, maxSubdivisions, maxSegments, segmentsSinceStart, angle, curvature, color, season);
         }
         
         // Do Split and Create 2 Branches.
         else{
             // Left subBranch
             Branches subBranch_1;
-            float angle_1 = angle-ofRandom(0, PI/3);
+            float angle_1 = angle-ofRandom(0, maxSplitAngle);
             
             // Right subBranch
             Branches subBranch_2;
-            float angle_2 = angle+ofRandom(0, PI/3);
+            float angle_2 = angle+ofRandom(0, maxSplitAngle);
             
-            subBranch_1.setup(xPos, yPos, width, length, splitPercentage, maxSplitAngle, maxSubdivisions, maxSegments, segmentsSinceStart, angle_1, curvature, color);
-            subBranch_2.setup(xPos, yPos, width, length, splitPercentage, maxSplitAngle, maxSubdivisions, maxSegments, segmentsSinceStart, angle_2, curvature, color);
+            subBranch_1.setup(xPos, yPos, width, length, splitPercentage, maxSplitAngle, maxSubdivisions, maxSegments, segmentsSinceStart, angle_1, curvature, color, season);
+            subBranch_2.setup(xPos, yPos, width, length, splitPercentage, maxSplitAngle, maxSubdivisions, maxSegments, segmentsSinceStart, angle_2, curvature, color, season);
         }
     }
+    
+
     
     ofPopMatrix();
 }

@@ -7,6 +7,7 @@ void ofApp::setup(){
     ofSetRectMode(OF_RECTMODE_CENTER);
     ofEnableSmoothing();
     ofEnableAlphaBlending();
+    season = 1;
     
 }
 
@@ -42,15 +43,21 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-    
+    cout<<season<<endl;
     ofBackground(250, 250, 250);
     myBranches.setup(ofGetWidth()/2,
-                     4*ofGetHeight()/5,
-                     40, 40,
-                     0.3, PI/4,
-                     2, 5, 0,
-                     -PI/2, 0,
-                     ofColor(130, 50, 20));
+                     9*ofGetHeight()/10,
+                     40,
+                     80,
+                     0.3,
+                     PI/3,
+                     2,
+                     5,
+                     0,
+                     -PI/2,
+                     0,
+                     ofColor(130, 50, 20),
+                     season);
     
     /*branches.setup(float _xPos,
                     float _yPos,
@@ -63,7 +70,13 @@ void ofApp::mousePressed(int x, int y, int button){
                     float _segmentsSinceStart,
                     float _angle,
                     float _curvature,
-                    ofColor _color);*/
+                    ofColor _color
+                    int _season);*/
+    season += 1;
+    if (season > 4) {
+        season = 1;
+    }
+    
 
 }
 

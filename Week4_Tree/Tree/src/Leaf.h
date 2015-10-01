@@ -16,7 +16,7 @@ class Leaf {
 public:
     void setup();
     void update();
-    void draw(float _xPos, float _yPos);
+    void draw(float _xPos, float _yPos, int _season);
     
 private:
     //LEAF VARIABLES
@@ -33,6 +33,8 @@ private:
     float rotation;
     
     float scaleFactor;
+    
+    int season;
     
     
 };

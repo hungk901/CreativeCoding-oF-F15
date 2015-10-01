@@ -27,7 +27,8 @@ class Branches : public ofBaseApp{
                    float _segmentsSinceStart,
                    float _angle,
                    float _curvature,
-                   ofColor _color
+                   ofColor _color,
+                   int _season
         );
         void update();
         void draw();
@@ -45,6 +46,7 @@ class Branches : public ofBaseApp{
         float angle;    // It is Radians(using PI) in Code but not Degrees.
         float curvature;    // To Bend Branches.
         ofColor color;
+        int season;
     
         int numLeaves;
         vector<Leaf> myLeaves;

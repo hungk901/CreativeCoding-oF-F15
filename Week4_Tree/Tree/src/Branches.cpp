@@ -94,7 +94,7 @@ void Branches::setup(
     //-----------------------------//
     
     for (int i = 0; i < numLeaves; i++) {
-        myLeaves[i].draw(xPos+length*cos(angle), yPos+length*sin(angle), season);
+        myLeaves[i].draw(xPos+length*cos(angle), yPos+length*sin(angle), season, segmentsSinceStart);
     }
     
     

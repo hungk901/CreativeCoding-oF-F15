@@ -147,7 +147,7 @@ void ofApp::mousePressed(int x, int y, int button){
                      ofColor(130, 50, 20),
                      season);
     
-    /*branches.setup(float _xPos,
+    branches.setup(float _xPos,
                     float _yPos,
                     float _width, 
                     float _length,

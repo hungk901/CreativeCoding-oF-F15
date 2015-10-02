@@ -16,7 +16,7 @@ class Leaf {
 public:
     void setup();
     void update();
-    void draw(float _xPos, float _yPos, int _season);
+    void draw(float _xPos, float _yPos, int _season, int _segmentsSinceStart);
     
 private:
     //LEAF VARIABLES
@@ -35,6 +35,10 @@ private:
     float scaleFactor;
     
     int season;
+    int segmentsSinceStart;
+    
+    ofColor flowerColor;
+    int flowerRotate;
     
     
 };

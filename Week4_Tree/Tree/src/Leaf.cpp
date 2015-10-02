@@ -39,6 +39,9 @@ void Leaf::setup(){
     
     scaleFactor = ofRandom(0.8, 1.2);
     
+    flowerColor = ofColor(250, ofRandom(150, 200), 200, ofRandom(225, 255));
+    flowerRotate = 0;
+    
 }
 
 //--------------------------------------------------------------
@@ -47,9 +50,10 @@ void Leaf::update(){
 }
 
 //--------------------------------------------------------------
-void Leaf::draw(float _xPos, float _yPos, int _season){
+void Leaf::draw(float _xPos, float _yPos, int _season, int _segmentsSinceStart){
     
     season = _season;
+    segmentsSinceStart = _segmentsSinceStart;
     
     //--------------------------//
     //-DRAW LEAF / STEM / FRUIT-//
@@ -69,7 +73,7 @@ void Leaf::draw(float _xPos, float _yPos, int _season){
     }
     
     if (season == 1) {
-        scaleFactor = ofRandom(0.5, 0.7);
+        scaleFactor = ofRandom(0.7, 0.9);
     }
     
     ofTranslate(xPos, yPos);    // Set Center Point to xPos and yPos.
@@ -85,105 +89,121 @@ void Leaf::draw(float _xPos, float _yPos, int _season){
     
     // Season Winter, all Leaves die.
     if (season != 4) {
-    
-    //-----------------------------//
-    //------1. Draw Left Leaf------//
-    //-----------------------------//
-    
-    ofBeginShape();
-    ofSetColor(leafColorLeft);  // Set Color Green to Leaf.
+        
+        //-----------------------------//
+        //------1. Draw Left Leaf------//
+        //-----------------------------//
+        
+        ofBeginShape();
+            ofSetColor(leafColorLeft);  // Set Color Green to Leaf.
 
-    
-    // Set x Values of Bezier
-    float x0 = 0;
-    float x1 = x0-leafWidth/2;
-    float x2 = x0-leafWidth/4;
-    float x3 = x0;
+            
+            // Set x Values of Bezier
+            float x0 = 0;
+            float x1 = x0-leafWidth/2;
+            float x2 = x0-leafWidth/4;
+            float x3 = x0;
 
-    // Set y Values of Bezier
-    float y0 = (2*stemHeight)/3;
-    float y1 = y0+leafHeight/3;
-    float y2 = y0+(2*leafHeight)/3;
-    float y3 = y0+leafHeight;
+            // Set y Values of Bezier
+            float y0 = (2*stemHeight)/3;
+            float y1 = y0+leafHeight/3;
+            float y2 = y0+(2*leafHeight)/3;
+            float y3 = y0+leafHeight;
+            
+            ofVertex(x0, y0);
+                ofBezierVertex(x1, y1, x2, y2, x3, y3);
+        ofEndShape();
+        
+        
+        //----------------------------//
+        //-----2. Draw Right Leaf-----//
+        //----------------------------//
+        
+        ofBeginShape();
+            ofSetColor(leafColorRight);
+            
+            // Set x Values of Bezier
+            x0 = 0;
+            x1 = x0+leafWidth/2;
+            x2 = x0+leafWidth/4;
+            x3 = x0;
+            
+            // Set y Values of Bezier
+            y0 = (2*stemHeight)/3;
+            y1 = y0+leafHeight/3;
+            y2 = y0+(2*leafHeight)/3;
+            y3 = y0+leafHeight;
+            
+            ofVertex(x0, y0);
+            ofBezierVertex(x1, y1, x2, y2, x3, y3);
+        ofEndShape();
+        
+        
+        //---------------------------//
+        //-----3. Draw Stem Body-----//
+        //---------------------------//
+        
+        ofSetColor(stemColor);  //Set Color Brown to Stem.
+        ofRect(0, 0+stemHeight/2, stemWidth, stemHeight);
+        
+        
+        //---------------------------//
+        //-----4. Draw Stem Head-----//
+        //---------------------------//
+        
+        ofTriangle(0-stemWidth/2, 0+stemHeight, 0+stemWidth/2, 0+stemHeight, 0, 0+stemHeight+leafHeight/3);
+        
+    }
     
-    ofVertex(x0, y0);
-    ofBezierVertex(x1, y1, x2, y2, x3, y3);
+    // Season Spring, Flowers grow up.
+    if (season == 1 && segmentsSinceStart > 1 && segmentsSinceStart < 4) {
     
-    ofEndShape();
-    
-    
-    //----------------------------//
-    //-----2. Draw Right Leaf-----//
-    //----------------------------//
-    
-    ofBeginShape();
-    ofSetColor(leafColorRight);
-    
-    // Set x Values of Bezier
-    x0 = 0;
-    x1 = x0+leafWidth/2;
-    x2 = x0+leafWidth/4;
-    x3 = x0;
-    
-    // Set y Values of Bezier
-    y0 = (2*stemHeight)/3;
-    y1 = y0+leafHeight/3;
-    y2 = y0+(2*leafHeight)/3;
-    y3 = y0+leafHeight;
-    
-    ofVertex(x0, y0);
-    ofBezierVertex(x1, y1, x2, y2, x3, y3);
-    
-    ofEndShape();
-    
-    
-    //---------------------------//
-    //-----3. Draw Stem Body-----//
-    //---------------------------//
-    
-    ofSetColor(stemColor);  //Set Color Brown to Stem.
-    ofRect(0, 0+stemHeight/2, stemWidth, stemHeight);
-    
-    
-    //---------------------------//
-    //-----4. Draw Stem Head-----//
-    //---------------------------//
-    
-    ofTriangle(0-stemWidth/2, 0+stemHeight, 0+stemWidth/2, 0+stemHeight, 0, 0+stemHeight+leafHeight/3);
-    
+        //------------------------------//
+        //-----4-5. Draw Flowers--------//
+        //------------------------------//
+        
+        ofPushMatrix();
+            ofSetColor(flowerColor);
+            ofTranslate(0, stemHeight);
+            for (int i = 0; i <= 3; i++) {
+                ofRotateZ(flowerRotate);
+                ofEllipse(0, 0, 50, 10);
+                flowerRotate += 45;
+            }
+        ofPopMatrix();
     }
 
 
     // Season Summer, Fruits grow up.
     if (season == 2) {
-    
-    //------------------------------//
-    //-----5. Draw Fruits No.01-----//
-    //------------------------------//
-    
-    ofSetColor(fruitColorOne);
-    ofCircle(fruitXPosOne, fruitYPosOne, fruitRadiusOne);
-    
-    
-    //------------------------------//
-    //-----6. Draw Fruits No.02-----//
-    //------------------------------//
-    
-    ofSetColor(fruitColorTwo);
-    ofCircle(fruitXPosTwo, fruitYPosTwo, fruitRadiusTwo);
         
+        //------------------------------//
+        //-----5. Draw Fruits No.01-----//
+        //------------------------------//
+        
+        ofSetColor(fruitColorOne);
+        ofCircle(fruitXPosOne, fruitYPosOne, fruitRadiusOne);
+        
+        
+        //------------------------------//
+        //-----6. Draw Fruits No.02-----//
+        //------------------------------//
+        
+        ofSetColor(fruitColorTwo);
+        ofCircle(fruitXPosTwo, fruitYPosTwo, fruitRadiusTwo);
+            
     }
     
     
     // Season Winter, all Leaves die.
     if (season != 4) {
     
-    //----------------------//
-    //-----7. Draw Root-----//
-    //----------------------//
-    
-    ofSetColor(stemColor);
-    ofCircle(0, 0, stemWidth/2);
+        //----------------------//
+        //-----7. Draw Root-----//
+        //----------------------//
+        
+        ofSetColor(stemColor);
+        ofCircle(0, 0, stemWidth/2);
         
     }
     

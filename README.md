@@ -4,7 +4,7 @@
 ####Class Assignments & Projects
 -
 
-![image](https://raw.githubusercontent.com/hungk901/CreativeCoding_oF_F15_KuoJui_Hung/master/bio.jpg =360x)
+![image](https://raw.githubusercontent.com/hungk901/CreativeCoding_oF_F15_KuoJui_Hung/master/bio.jpg)
 ###About Me
 My name is Kuo-Jui Hung and you can also call me Ray if you don't understand how to pronounce the original one:) 
 

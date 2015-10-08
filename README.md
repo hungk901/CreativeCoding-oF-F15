@@ -4,7 +4,7 @@
 ####Class Assignments & Projects
 -
 
-![image](bio.jpg =360x)
+![image](./bio.jpg =360x)
 ###About Me
 My name is Kuo-Jui Hung and you can also call me Ray if you don't understand how to pronounce the original one:) 
 

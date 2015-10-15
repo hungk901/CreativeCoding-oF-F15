@@ -37,6 +37,8 @@ void Ball::update(){
     
     state = 0;
     
+    float myTime = ofGetElapsedTimef();
+    
     // Update Vel by Acc.
     vel.x += acc.x;
     vel.y += acc.y;
@@ -45,19 +47,24 @@ void Ball::update(){
     pos.x += vel.x;
     pos.y += vel.y;
     
-    // At the top of first.
+    // At the top of first and First Explosion.
     if (pos.x == ofGetWidth()/2 && vel.y == 0) {
-        vel.x += (int)ofRandom(-10, 10);
-        vel.y += (int)ofRandom(-5, -10);
-        
+        vel.x += ofRandom(-5, 5);
+        vel.y += ofRandom(-5, -10);
+        acc.y = 0.25;
+    }
+    
+    // Second Explosion.
+    if (myTime > 2.1 && myTime < 2.15) {
         state = 1;
     }
     
-    if ((pos.y > ofGetHeight()/3) && (vel.y > 0)) {
-        vel.y = 1;
-        vel.x = ofRandom(-5, 5);
-        // vel.y += ofRandom(-5, -10);
-        state = 2;
+    if (state == 1) {
+        vel.x += ofRandom(-1, 1);
+        vel.y += -5;
+        acc.y = 0.1;
+        diameter = 10;
+        ballColor = ofColor(ofRandom(150, 250), ofRandom(150, 250), ofRandom(150, 250));
     }
     
 }

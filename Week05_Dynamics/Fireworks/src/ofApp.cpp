@@ -17,10 +17,10 @@ void ofApp::fireworkTrigger(){
     ballsBox.clear();
     
     // Setup many balls
-    numBoxs = ofRandom(5, 10);
-    numBalls = ofRandom(5, 10);
+    numBoxs = ofRandom(10, 15);
+    numBalls = ofRandom(10, 15);
     
-    for (int j = 0; j < numBoxs; j++) {
+    for (int n = 0; n < numBoxs; n++) {
     
         for(int i = 0; i < numBalls; i++) {
         Ball temp;
@@ -43,11 +43,10 @@ void ofApp::fireworkTrigger(){
                    .5,
                    
                    // Diameter
-                   25,
+                   15,
                    
                    // Ball Color
-                   // ofColor(ofRandom(255), ofRandom(255), ofRandom(255))
-                   ofColor(255),
+                   ofColor(ofRandom(200, 250), ofRandom(200, 250), ofRandom(200, 250)),
                    
                    //
                    0
@@ -63,9 +62,9 @@ void ofApp::fireworkTrigger(){
 void ofApp::update(){
     
     // Update many balls
-    for (int j = 0; j < numBoxs; j++) {
+    for (int n = 0; n < numBoxs; n++) {
         for(int i = 0; i < numBalls; i++) {
-            ballsBox[j][i].update();
+            ballsBox[n][i].update();
         }
     }
 
@@ -79,25 +78,17 @@ void ofApp::draw(){
         ofRect(0,0, ofGetWidth(), ofGetHeight());
     ofPopStyle();
     
-    for (int j = 0; j < numBoxs; j++) {
-        
+    for (int n = 0; n < numBoxs; n++) {
         for(int i = 0; i < numBalls; i++) {
             
-            if(ballsBox[j][i].state == 0 || ballsBox[j][i].state == 1) {
-
-                ballsBox[j][0].draw();
-                
+            ballsBox[n][0].draw();
+            
+            if (ofGetElapsedTimef() > 2.1) {
+                ballsBox[n][i].draw();
             }
-            
-            if (ballsBox[j][i].state == 2) {
-                
-                ballsBox[j][0].draw();
-            
-            }
-            
         }
     }
-
+    
 }
 
 //--------------------------------------------------------------
@@ -123,6 +114,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
     
+    ofResetElapsedTimeCounter();
     fireworkTrigger();
 
 }

@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>23E7F606-331E-48A6-B8BC-3F6FE722C050</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Fireworks</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>F49D35AD163AA38EE09C75299D061E5BEE56E120</key>
 		<string>https://github.com/hungk901/CreativeCoding_oF_F15_KuoJui_Hung.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Week05_Dynamics/Fireworks/Fireworks.xcodeproj</string>
+	<string>Week05_Dynamics/Fireworks/Fireworks.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>F49D35AD163AA38EE09C75299D061E5BEE56E120</key>

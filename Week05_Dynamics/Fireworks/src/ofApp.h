@@ -1,11 +1,13 @@
 #pragma once
 
 #include "ofMain.h"
+#include "Ball.h"
 
 class ofApp : public ofBaseApp{
 
 	public:
 		void setup();
+        void fireworkTrigger();
 		void update();
 		void draw();
 
@@ -18,5 +20,10 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		
+    
+        int numBoxs;
+        int numBalls;
+        vector < vector <Ball> > ballsBox;
+        vector <Ball> manyBalls;
+    
 };

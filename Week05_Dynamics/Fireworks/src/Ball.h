@@ -14,13 +14,15 @@
 class Ball : public ofBaseApp{
     
     public:
-        void setup();
         void setup(float _xPos,
                    float _yPos,
                    float _xVel,
                    float _yVel,
                    float _xAcc,
-                   float _yAcc);
+                   float _yAcc,
+                   float _diameter,
+                   ofColor _ballColor,
+                   int _state);
         void update();
         void draw();
     
@@ -34,13 +36,14 @@ class Ball : public ofBaseApp{
         void dragEvent(ofDragInfo dragInfo);
         void gotMessage(ofMessage msg);
     
+        int state;
+    
     private:
-        ofVec2f pos;
         ofVec2f vel;
+        ofVec2f pos;
         ofVec2f acc;
         float diameter;
-        float bounciness;
-        float ballColor;
+        ofColor ballColor;
     
 };
 

@@ -56,10 +56,6 @@ void Ball::update(){
     
     // Second Explosion.
     if (myTime > 2.1 && myTime < 2.15) {
-        state = 1;
-    }
-    
-    if (state == 1) {
         vel.x += ofRandom(-1, 1);
         vel.y += -5;
         acc.y = 0.1;

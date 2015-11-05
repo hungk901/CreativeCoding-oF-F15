@@ -1,4 +1,4 @@
-#Week 2-Branches
+#Week 03 - Branches
 
-###Create branches.
+###Create some branches for our leaves.
 

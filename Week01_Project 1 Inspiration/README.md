@@ -1,4 +1,4 @@
-#Project 1-Inspiration
+#Project 01 - Inspiration
 
 ###The first idea came up wtih in my mind is "**Lightning**".
 

@@ -1,5 +1,6 @@
-#Week 2-Leaf
+#Week 02 - Leaf
 
-###Create some leaves.
+###Let's create some leaves and give them some cool features.
 
-I changed the color of leaves and addded fruits on the leaves.
+* I change the color of leaves,
+* Addd fruits on the leaves.

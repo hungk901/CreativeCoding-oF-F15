@@ -30,6 +30,7 @@ public:
     vector <ofPoint> attractPoints;
     vector <ofPoint> attractPointsWithMovement;
     
-    ofColor particleColor;
+    int colorR, colorG,colorB;
+    int addColorR, addColorG, addColorB;
 
 };

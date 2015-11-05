@@ -35,7 +35,7 @@ void Particles::reset(){
     particleScale = ofRandom(0.5, 1.0);
     
     
-    boundaryRadius = 350.0;
+    boundaryRadius = 375.0;
 }
 
 //------------------------------------------------------------------

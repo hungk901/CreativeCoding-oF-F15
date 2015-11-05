@@ -11,7 +11,10 @@ void ofApp::setup(){
     int num = 100;
     p.assign(num, Particles());
     
-    particleColor = ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255));
+    colorR = ofRandom(150, 255);
+    colorG = ofRandom(150, 255);
+    colorB = ofRandom(150, 255);
+    addColorR = addColorG = addColorB = 2;
     
     resetParticles();
 }
@@ -44,6 +47,20 @@ void ofApp::update(){
         attractPointsWithMovement[i].x = attractPoints[i].x + ofSignedNoise(i * 0.1, ofGetElapsedTimef() * 0.7) * 12.0;
         attractPointsWithMovement[i].y = attractPoints[i].y + ofSignedNoise(i * -0.1, ofGetElapsedTimef() * 0.7) * 12.0;
     }
+    
+    colorR += addColorR;
+    colorG += addColorG;
+    colorB += addColorB;
+    
+    if (colorR > 255 || colorR < 150) {
+        addColorR *= -1;
+    }
+    if (colorG > 255 || colorG < 150) {
+        addColorG *= -1;
+    }
+    if (colorB > 255 || colorB < 150) {
+        addColorB *= -1;
+    }
 }
 
 //--------------------------------------------------------------
@@ -52,7 +69,7 @@ void ofApp::draw(){
     audioInput.draw();
     ofBackgroundGradient(ofColor(60,60,60), ofColor(10,10,10));
     
-    //ofSetColor(particleColor);
+    ofSetColor(colorR, colorG, colorB);
     for(unsigned int i = 0; i < p.size(); i++){
         p[i].draw();
         
@@ -61,6 +78,7 @@ void ofApp::draw(){
             ofLine(p[i].pos.x, p[i].pos.y, p[i+1].pos.x, p[i+1].pos.y);
         }
     }
+    cout << colorR << " / " << colorG << " / " << colorB << endl;
 
     ofSetColor(230);
     ofDrawBitmapString("\n\nSpacebar to reset. \n", 25, 10);

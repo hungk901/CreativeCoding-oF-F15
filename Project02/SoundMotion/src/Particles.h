@@ -15,11 +15,7 @@
 class Particles{
     
     public:
-        Particles();
-    
-        void setAttractPoints( vector <ofPoint> * attract );
-    
-        void reset();
+        void setup();
         void update(float _scaledVolume);
         void draw();
     

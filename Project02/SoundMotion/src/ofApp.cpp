@@ -3,32 +3,27 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
+    ofSetVerticalSync(true);
+    
     audioInput.setup();
     audioInput.soundStream.start();
-    
-    ofSetVerticalSync(true);
     
     int num = 100;
     p.assign(num, Particles());
     
-    colorR = ofRandom(150, 255);
-    colorG = ofRandom(150, 255);
-    colorB = ofRandom(150, 255);
+    colorR = ofRandom(100, 255);
+    colorG = ofRandom(100, 255);
+    colorB = ofRandom(100, 255);
     addColorR = addColorG = addColorB = 2;
     
-    resetParticles();
+    setParticles();
 }
 
 //--------------------------------------------------------------
-void ofApp::resetParticles(){
-    
-    //these are the attraction points used in the forth demo
-    attractPoints.clear();
-    attractPointsWithMovement = attractPoints;
+void ofApp::setParticles(){
     
     for(unsigned int i = 0; i < p.size(); i++){
-        p[i].setAttractPoints(&attractPointsWithMovement);;
-        p[i].reset();
+        p[i].setup();
     }	
 }
 
@@ -42,54 +37,43 @@ void ofApp::update(){
         p[i].update(vol);
     }
     
-    //lets add a bit of movement to the attract points
-    for(unsigned int i = 0; i < attractPointsWithMovement.size(); i++){
-        attractPointsWithMovement[i].x = attractPoints[i].x + ofSignedNoise(i * 0.1, ofGetElapsedTimef() * 0.7) * 12.0;
-        attractPointsWithMovement[i].y = attractPoints[i].y + ofSignedNoise(i * -0.1, ofGetElapsedTimef() * 0.7) * 12.0;
-    }
-    
+    // Update Color.
     colorR += addColorR;
     colorG += addColorG;
     colorB += addColorB;
     
-    if (colorR > 255 || colorR < 150) {
+    if (colorR > 255 || colorR < 100) {
         addColorR *= -1;
     }
-    if (colorG > 255 || colorG < 150) {
+    if (colorG > 255 || colorG < 100) {
         addColorG *= -1;
     }
-    if (colorB > 255 || colorB < 150) {
+    if (colorB > 255 || colorB < 100) {
         addColorB *= -1;
     }
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     
-    audioInput.draw();
-    ofBackgroundGradient(ofColor(60,60,60), ofColor(10,10,10));
+    ofBackgroundGradient(ofColor(0), ofColor(80));
     
-    ofSetColor(colorR, colorG, colorB);
     for(unsigned int i = 0; i < p.size(); i++){
         p[i].draw();
-        
+    
         if(i+1 < p.size()){
             ofSetLineWidth(1);
             ofLine(p[i].pos.x, p[i].pos.y, p[i+1].pos.x, p[i+1].pos.y);
         }
     }
-    cout << colorR << " / " << colorG << " / " << colorB << endl;
-
-    ofSetColor(230);
-    ofDrawBitmapString("\n\nSpacebar to reset. \n", 25, 10);
+    ofSetColor(colorR, colorG, colorB);
+    // cout << colorR << " / " << colorG << " / " << colorB << endl;
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed  (int key){
-    
-    if( key == ' ' ){
-        resetParticles();
-    }
+
 }
 
 //--------------------------------------------------------------

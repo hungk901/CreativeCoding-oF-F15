@@ -9,17 +9,7 @@
 #include "Particles.h"
 
 //------------------------------------------------------------------
-Particles::Particles(){
-    attractPoints = NULL;
-}
-
-//------------------------------------------------------------------
-void Particles::setAttractPoints( vector <ofPoint> * attract ){
-    attractPoints = attract;
-}
-
-//------------------------------------------------------------------
-void Particles::reset(){
+void Particles::setup(){
     
     centerPoint.x = ofGetWidth()/2;
     centerPoint.y = ofGetHeight()/2;
@@ -34,22 +24,19 @@ void Particles::reset(){
     drag  = ofRandom(0.95, 0.998);
     particleScale = ofRandom(0.5, 1.0);
     
-    
     boundaryRadius = 375.0;
 }
 
 //------------------------------------------------------------------
 void Particles::update(float _scaledVolume){
     
-    // 1 - APPLY THE FORCES
+    //----------01. APPLY FORCE----------//
     
     ofPoint attractPt(ofGetWidth()/2, ofGetHeight()/2);
     
     scaledVolume = _scaledVolume;
     
     scaledVolume *= 1000;
-    
-    // cout << "scaledVolume: " << scaledVolume << endl;
     
     pos.x += scaledVolume * cos(ofRandom(0, 2*PI));
     pos.y += scaledVolume * sin(ofRandom(0, 2*PI));
@@ -65,12 +52,12 @@ void Particles::update(float _scaledVolume){
     vel += frc;         //apply force
     
     
-    // 2 - UPDATE OUR POSITION
+    //----------02. UPDATE POSITION----------//
     
     pos += vel;
     
     
-    // 3 - LIMIT THE PARTICLES TO STAY IN A CIRCLE
+    //----------03. LIMIT PARTICLES IN A CIRCLE----------//
     
     distance = pos - centerPoint;
     if ( sqrtf( powf(fabs(distance.x), 2.0) + powf(fabs(distance.y), 2.0) ) > boundaryRadius){
@@ -84,8 +71,6 @@ void Particles::update(float _scaledVolume){
 //------------------------------------------------------------------
 void Particles::draw(){
     
-    //ofSetColor(particleColor);
     ofCircle(pos.x, pos.y, particleScale * 2.0);
-    
 }
 

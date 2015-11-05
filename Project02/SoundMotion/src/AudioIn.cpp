@@ -12,19 +12,14 @@
 void AudioIn::setup(){
     
     ofSetVerticalSync(true);
-    ofSetCircleResolution(80);
-    ofBackground(54, 54, 54);
     
-    // 0 output channels,
-    // 2 input channels
-    // 44100 samples per second
-    // 256 samples per buffer
+    // 0 Output channel
+    // 2 Input channel
+    // 44100 Samples/sec
+    // 256 Samples/buffer
     // 4 num buffers (latency)
     
     soundStream.listDevices();
-    
-    //if you want to set a different device id
-    //soundStream.setDeviceID(0); //bear in mind the device id corresponds to all audio devices, including  input-only and output-only devices.
     
     int bufferSize = 256;
     
@@ -42,7 +37,8 @@ void AudioIn::setup(){
 
 //--------------------------------------------------------------
 void AudioIn::update(){
-    //lets scale the vol up to a 0-1 range
+    
+    // Scale the vol to a 0-1 range
     scaledVol = ofMap(smoothedVol, 0.0, 2.30, 0.0, 1.0, true);
     return scaledVol;
 }
@@ -57,7 +53,7 @@ void AudioIn::audioIn(float * input, int bufferSize, int nChannels){
     
     float curVol = 0.0;
     
-    // samples are "interleaved"
+    // Samples are "Interleaved"
     int numCounted = 0;
     
     for (int i = 0; i < bufferSize; i++){
@@ -69,10 +65,10 @@ void AudioIn::audioIn(float * input, int bufferSize, int nChannels){
         numCounted += 2;
     }
     
-    //this is how we get the mean of rms :)
+    // Get the mean of rms.
     curVol /= (float)numCounted;
     
-    // this is how we get the root of rms :)
+    // Get the root of rms.
     curVol = sqrt( curVol );
     
     smoothedVol *= 0.93;

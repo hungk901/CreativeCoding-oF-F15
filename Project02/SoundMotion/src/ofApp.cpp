@@ -3,24 +3,45 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
+    //--- Synchronizes the Redraw to the Vertical Refresh of Screen ---//
+    
     ofSetVerticalSync(true);
+    
+    
+    //----- Audio Setup -----//
     
     audioInput.setup();
     audioInput.soundStream.start();
     
+    
+    //----- Setup Particle Numbers -----//
+    
     int num = 100;
     p.assign(num, Particles());
+    
+    isGrabbed = false;
+    
+    resetParticles();
+}
+
+//--------------------------------------------------------------
+void ofApp::resetParticles(){
+    
+    //----- Initial CenterPoints -----//
+    
+    ctrPoint.x = ofGetWidth()/2;
+    ctrPoint.y = ofGetHeight()/2;
+    
+    
+    //----- Random Color -----//
     
     colorR = ofRandom(100, 255);
     colorG = ofRandom(100, 255);
     colorB = ofRandom(100, 255);
     addColorR = addColorG = addColorB = 2;
     
-    setParticles();
-}
-
-//--------------------------------------------------------------
-void ofApp::setParticles(){
+    
+    //----- !!SETUP each Particle!! -----//
     
     for(unsigned int i = 0; i < p.size(); i++){
         p[i].setup();
@@ -30,14 +51,21 @@ void ofApp::setParticles(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
+    //----- Audio Update -----//
     audioInput.update();
     float vol = audioInput.scaledVol;
     
-    for(unsigned int i = 0; i < p.size(); i++){
-        p[i].update(vol);
+    //----- Grab the Whole Sets -----//
+    if (isGrabbed == true) {
+        ctrPoint.x = mouseX;
+        ctrPoint.y = mouseY;
+    }
+    else {
+        ctrPoint.x = ofGetWidth()/2;
+        ctrPoint.y = ofGetHeight()/2;
     }
     
-    // Update Color.
+    //----- Change Color per Frame -----//
     colorR += addColorR;
     colorG += addColorG;
     colorB += addColorB;
@@ -52,13 +80,19 @@ void ofApp::update(){
         addColorB *= -1;
     }
     
+    //----- !!UPDATE each Particle!! -----//
+    for(int i = 0; i < p.size(); i++){
+        p[i].update(vol, ctrPoint);
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     
+    //----- Draw Gradient Background -----//
     ofBackgroundGradient(ofColor(0), ofColor(80));
     
+    //----- Draw Particles and Draw Lines -----//
     for(unsigned int i = 0; i < p.size(); i++){
         p[i].draw();
     
@@ -68,7 +102,6 @@ void ofApp::draw(){
         }
     }
     ofSetColor(colorR, colorG, colorB);
-    // cout << colorR << " / " << colorG << " / " << colorB << endl;
 }
 
 //--------------------------------------------------------------
@@ -93,12 +126,16 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-
+    
+    if (!isGrabbed) {
+        isGrabbed = true;
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
     
+    isGrabbed = false;
 }
 
 //--------------------------------------------------------------

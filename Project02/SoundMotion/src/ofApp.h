@@ -12,7 +12,7 @@ public:
     void update();
     void draw();
     
-    void setParticles();
+    void resetParticles();
     
     void keyPressed(int key);
     void keyReleased(int key);
@@ -27,8 +27,13 @@ public:
     AudioIn audioInput;
     
     vector <Particles> p;
+    vector <ofPoint> attractPoints;
+    vector <ofPoint> attractPointsWithMovement;
+    ofPoint ctrPoint;
     
     int colorR, colorG,colorB;
     int addColorR, addColorG, addColorB;
+    
+    bool isGrabbed;
 
 };

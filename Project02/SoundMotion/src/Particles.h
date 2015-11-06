@@ -15,9 +15,13 @@
 class Particles{
     
     public:
+        //Particles();
+    
         void setup();
-        void update(float _scaledVolume);
+        void update(float _scaledVolume, ofPoint _centerPoint);
         void draw();
+    
+        void setAttractPoints( vector <ofPoint> * attract );
     
         ofPoint pos;
         ofPoint vel;

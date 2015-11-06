@@ -9,10 +9,17 @@
 #include "Particles.h"
 
 //------------------------------------------------------------------
+//Particles::Particles(){
+//    attractPoints = NULL;
+//}
+
+//------------------------------------------------------------------
+void Particles::setAttractPoints( vector <ofPoint> * attract ){
+    attractPoints = attract;
+}
+
+//------------------------------------------------------------------
 void Particles::setup(){
-    
-    centerPoint.x = ofGetWidth()/2;
-    centerPoint.y = ofGetHeight()/2;
     
     pos.x = ofGetWidth()/2;
     pos.y = ofGetHeight()/2;
@@ -28,13 +35,15 @@ void Particles::setup(){
 }
 
 //------------------------------------------------------------------
-void Particles::update(float _scaledVolume){
+void Particles::update(float _scaledVolume, ofPoint _centerPoint){
+    
+    //----------01. Pass Parameters----------//
+    scaledVolume = _scaledVolume;
+    centerPoint.x = _centerPoint.x;
+    centerPoint.y = _centerPoint.y;
     
     //----------01. APPLY FORCE----------//
-    
-    ofPoint attractPt(ofGetWidth()/2, ofGetHeight()/2);
-    
-    scaledVolume = _scaledVolume;
+    ofPoint attractPt(centerPoint.x, centerPoint.y);
     
     scaledVolume *= 1000;
     
@@ -62,15 +71,14 @@ void Particles::update(float _scaledVolume){
     distance = pos - centerPoint;
     if ( sqrtf( powf(fabs(distance.x), 2.0) + powf(fabs(distance.y), 2.0) ) > boundaryRadius){
         distance.normalize();
-        pos.x = centerPoint.x + boundaryRadius * distance.x;
-        pos.y = centerPoint.y + boundaryRadius * distance.y;
+        pos.x = centerPoint.x + (boundaryRadius * distance.x);
+        pos.y = centerPoint.y + (boundaryRadius * distance.y);
         vel *= -1.0;
     }
 }
 
 //------------------------------------------------------------------
 void Particles::draw(){
-    
     ofCircle(pos.x, pos.y, particleScale * 2.0);
 }
 

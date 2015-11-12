@@ -87,7 +87,7 @@ void ofApp::update(){
     //----- !!UPDATE each Particle!! -----//
     for(int i = 0; i < p.size(); i++){
         p[i].modeSetting(setMode);
-        p[i].update(vol, ctrPoint, isGrabbed);
+        p[i].update(vol, ctrPoint);
     }
 }
 
@@ -114,7 +114,7 @@ void ofApp::draw(){
     
     //----- Show String -----//
     ofSetColor(250);
-    ofDrawBitmapString(modeString + "\n\nz | Free Flow - Move your Mouse. \nx | Drag Around - Drag Particles. \nc | Sound Motion - Particles reponse with Sound. ", 10, 20);
+    ofDrawBitmapString(modeString + "\n\nz | Free Flow - Move your Mouse. \nx | Drag Around - Drag Particles. \nc | Sound Motion - Particles reponse with Sound. \nr | Reset - Reset Current Mode.", 10, 20);
 }
 
 //--------------------------------------------------------------

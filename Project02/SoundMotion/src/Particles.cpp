@@ -37,12 +37,11 @@ void Particles::setup(){
 }
 
 //------------------------------------------------------------------
-void Particles::update(float _scaledVolume, ofPoint _centerPoint, bool _grabbed){
+void Particles::update(float _scaledVolume, ofPoint _centerPoint){
     
     //---------- 00. Pass Parameters --------------------//
     
     scaledVolume  = _scaledVolume;
-    grabbed       = _grabbed;
     centerPoint.x = _centerPoint.x;
     centerPoint.y = _centerPoint.y;
     
@@ -77,10 +76,6 @@ void Particles::update(float _scaledVolume, ofPoint _centerPoint, bool _grabbed)
         
         frc = attractPt-pos;
         frc.normalize();
-        
-        if (grabbed == true) {
-            
-        }
         
         vel *= drag;
         vel += frc*0.5;

@@ -22,7 +22,7 @@ class Particles{
     
     public:
         void setup();
-        void update(float _scaledVolume, ofPoint _centerPoint, bool _grabbed);
+        void update(float _scaledVolume, ofPoint _centerPoint);
         void draw();
     
         void modeSetting(modeSelection newMode);
@@ -41,7 +41,6 @@ class Particles{
         float boundaryRadius;               // Radius of Boundary
 
         float scaledVolume;                 // Volume after Scaled
-        bool grabbed;
     
         modeSelection mode;                 // Mode Set
 };

@@ -11,13 +11,16 @@ void ofApp::setup(){
     //----- Audio Setup -----//
     
     audioInput.setup();
-    audioInput.soundStream.start();
     
     
     //----- Setup Particle Numbers -----//
     
     int num = 100;
     p.assign(num, Particles());
+    
+    //----- Set Mode -----//
+    setMode = MODE_FREE_FLOW;
+    modeString = "[   Free Flow Mode  ]";
     
     isGrabbed = false;
     
@@ -44,6 +47,7 @@ void ofApp::resetParticles(){
     //----- !!SETUP each Particle!! -----//
     
     for(unsigned int i = 0; i < p.size(); i++){
+        p[i].modeSetting(setMode);
         p[i].setup();
     }	
 }
@@ -82,7 +86,8 @@ void ofApp::update(){
     
     //----- !!UPDATE each Particle!! -----//
     for(int i = 0; i < p.size(); i++){
-        p[i].update(vol, ctrPoint);
+        p[i].modeSetting(setMode);
+        p[i].update(vol, ctrPoint, isGrabbed);
     }
 }
 
@@ -93,20 +98,44 @@ void ofApp::draw(){
     ofBackgroundGradient(ofColor(0), ofColor(80));
     
     //----- Draw Particles and Draw Lines -----//
+    ofSetColor(colorR, colorG, colorB);
     for(unsigned int i = 0; i < p.size(); i++){
         p[i].draw();
     
-        if(i+1 < p.size()){
-            ofSetLineWidth(1);
+        if (i+1 < p.size()) {
             ofLine(p[i].pos.x, p[i].pos.y, p[i+1].pos.x, p[i+1].pos.y);
         }
+        
+        // Last Point connects to the First Point
+        if (i == p.size()) {
+            ofLine(p[i].pos.x, p[i].pos.y, p[0].pos.x, p[0].pos.y);
+        }
     }
-    ofSetColor(colorR, colorG, colorB);
+    
+    //----- Show String -----//
+    ofSetColor(250);
+    ofDrawBitmapString(modeString + "\n\nz | Free Flow - Move your Mouse. \nx | Drag Around - Drag Particles. \nc | Sound Motion - Particles reponse with Sound. ", 10, 20);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed  (int key){
-
+    
+    if( key == 'z' || key == 'Z'){
+        setMode = MODE_FREE_FLOW;
+        modeString = "[   Free Flow Mode  ]";
+    }
+    if( key == 'x' || key == 'X'){
+        setMode = MODE_DRAG_AROUND;
+        modeString = "[  Drag Around Mode ]";
+    }
+    if( key == 'c' || key == 'C'){
+        setMode = MODE_SOUND_MOTION;
+        modeString = "[ Sound Motion Mode ]";
+        audioInput.soundStream.start();
+    }
+    if( key == 'r' || key == 'R' ){
+        resetParticles();
+    }
 }
 
 //--------------------------------------------------------------
@@ -127,8 +156,10 @@ void ofApp::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
     
-    if (!isGrabbed) {
-        isGrabbed = true;
+    if (setMode == MODE_DRAG_AROUND || setMode == MODE_SOUND_MOTION) {
+        if (!isGrabbed) {
+            isGrabbed = true;
+        }
     }
 }
 

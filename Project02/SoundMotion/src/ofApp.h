@@ -24,16 +24,18 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
-    AudioIn audioInput;
+    AudioIn audioInput; // Audio Input
     
-    vector <Particles> p;
-    vector <ofPoint> attractPoints;
-    vector <ofPoint> attractPointsWithMovement;
-    ofPoint ctrPoint;
+    vector <Particles> p;           // Particles Array
+    vector <ofPoint> attractPoints; // Attract Point: Center / Mouse
+    ofPoint ctrPoint;               // Center Point
+    bool isGrabbed;                 // Check if particle is Grabbed
     
-    int colorR, colorG,colorB;
-    int addColorR, addColorG, addColorB;
+    int colorR, colorG,colorB;              // R, G, B Color
+    int addColorR, addColorG, addColorB;    // R, G, B add Value
     
-    bool isGrabbed;
+    modeSelection setMode;  // Mode Set
+    string modeString;      // Mode String
+    
 
 };

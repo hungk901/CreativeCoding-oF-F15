@@ -9,9 +9,9 @@
 #include "Particles.h"
 
 //------------------------------------------------------------------
-//Particles::Particles(){
-//    attractPoints = NULL;
-//}
+void Particles::modeSetting(modeSelection newMode){
+    mode = newMode;
+}
 
 //------------------------------------------------------------------
 void Particles::setAttractPoints( vector <ofPoint> * attract ){
@@ -20,6 +20,8 @@ void Particles::setAttractPoints( vector <ofPoint> * attract ){
 
 //------------------------------------------------------------------
 void Particles::setup(){
+    
+    randomValue = ofRandom(-10000, 10000);
     
     pos.x = ofGetWidth()/2;
     pos.y = ofGetHeight()/2;
@@ -35,45 +37,112 @@ void Particles::setup(){
 }
 
 //------------------------------------------------------------------
-void Particles::update(float _scaledVolume, ofPoint _centerPoint){
+void Particles::update(float _scaledVolume, ofPoint _centerPoint, bool _grabbed){
     
-    //----------01. Pass Parameters----------//
-    scaledVolume = _scaledVolume;
+    //---------- 00. Pass Parameters --------------------//
+    
+    scaledVolume  = _scaledVolume;
+    grabbed       = _grabbed;
     centerPoint.x = _centerPoint.x;
     centerPoint.y = _centerPoint.y;
     
-    //----------01. APPLY FORCE----------//
-    ofPoint attractPt(centerPoint.x, centerPoint.y);
     
-    scaledVolume *= 1000;
+    //---------- 01. FREE FLOW MODE --------------------//
     
-    pos.x += scaledVolume * cos(ofRandom(0, 2*PI));
-    pos.y += scaledVolume * sin(ofRandom(0, 2*PI));
+    if (mode == MODE_FREE_FLOW) {
+        
+        ofPoint attractPt(ofGetMouseX(), ofGetMouseY());
+        frc = attractPt-pos;
+        
+        // Particles close to the mouse
+        float dist = frc.length();
+        frc.normalize();
+        
+        vel *= drag;
+        if (dist < 150) {
+            vel += -frc;
+        }
+        else {
+            frc.x = ofSignedNoise(randomValue, pos.y * 0.01, ofGetElapsedTimef()*0.2);
+            frc.y = ofSignedNoise(randomValue, pos.x * 0.01, ofGetElapsedTimef()*0.2);
+            vel += frc * 0.04;
+        }
+    }
     
-    frc = attractPt-pos;    // Get the attraction force/vector by relativily pos
-    frc.normalize();        // by normalizing we disregard how close the particle is to the attraction point
+    //---------- 02. DRAG AROUND --------------------//
     
-    float n = ofMap(scaledVolume, 0, 60, 1, 0.91);
+    else if (mode == MODE_DRAG_AROUND) {
+        
+        ofPoint attractPt(centerPoint.x, centerPoint.y);
+        
+        frc = attractPt-pos;
+        frc.normalize();
+        
+        if (grabbed == true) {
+            
+        }
+        
+        vel *= drag;
+        vel += frc*0.5;
+    }
     
-    // cout << "n: " << n << endl;
     
-    vel *= drag * n;    //apply drag
-    vel += frc;         //apply force
+    //---------- 03. SOUND MOTION --------------------//
+    
+    else if (mode == MODE_SOUND_MOTION) {
+    
+        ofPoint attractPt(centerPoint.x, centerPoint.y);
+    
+        scaledVolume *= 1000;
+    
+        pos.x += scaledVolume * cos(ofRandom(0, 2*PI));
+        pos.y += scaledVolume * sin(ofRandom(0, 2*PI));
+    
+        frc = attractPt-pos;
+        frc.normalize();
+    
+        float n = ofMap(scaledVolume, 0, 60, 1, 0.91);
+
+        vel *= drag * n;
+        vel += frc;
+    }
     
     
-    //----------02. UPDATE POSITION----------//
+    //---------- 03. UPDATE POSITION ----------//
     
     pos += vel;
     
     
-    //----------03. LIMIT PARTICLES IN A CIRCLE----------//
+    //---------- 04. BOUNDARY ----------//
     
-    distance = pos - centerPoint;
-    if ( sqrtf( powf(fabs(distance.x), 2.0) + powf(fabs(distance.y), 2.0) ) > boundaryRadius){
-        distance.normalize();
-        pos.x = centerPoint.x + (boundaryRadius * distance.x);
-        pos.y = centerPoint.y + (boundaryRadius * distance.y);
-        vel *= -1.0;
+    if (mode == MODE_FREE_FLOW) {
+        if (pos.x > ofGetWidth()) {
+            pos.x = ofGetWidth();
+            vel.x *= -1.0;
+        }
+        if (pos.x < 0) {
+            pos.x = 0;
+            vel.x *= -1.0;
+        }
+        
+        if (pos.y > ofGetHeight()) {
+            pos.y = ofGetHeight();
+            vel.y *= -1.0;
+        }
+        if (pos.y < 0) {
+            pos.y = 0;
+            vel.y *= -1.0;
+        }
+    }
+    
+    else if (mode == MODE_DRAG_AROUND || mode == MODE_SOUND_MOTION) {
+        distance = pos - centerPoint;
+        if ( sqrtf( powf(fabs(distance.x), 2.0) + powf(fabs(distance.y), 2.0) ) > boundaryRadius){
+            distance.normalize();
+            pos.x = centerPoint.x + (boundaryRadius * distance.x);
+            pos.y = centerPoint.y + (boundaryRadius * distance.y);
+            vel *= -1.0;
+        }
     }
 }
 

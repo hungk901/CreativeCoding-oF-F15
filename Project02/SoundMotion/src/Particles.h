@@ -12,31 +12,38 @@
 #include "ofMain.h"
 #include "AudioIn.h"
 
+enum modeSelection{
+    MODE_FREE_FLOW,
+    MODE_DRAG_AROUND,
+    MODE_SOUND_MOTION
+};
+
 class Particles{
     
     public:
-        //Particles();
-    
         void setup();
-        void update(float _scaledVolume, ofPoint _centerPoint);
+        void update(float _scaledVolume, ofPoint _centerPoint, bool _grabbed);
         void draw();
     
+        void modeSetting(modeSelection newMode);
         void setAttractPoints( vector <ofPoint> * attract );
     
-        ofPoint pos;
-        ofPoint vel;
-        ofPoint frc;
-        float particleScale;
-        float drag;
+        ofPoint pos;            // Position X, Y
+        ofPoint vel;            // Velocity X, Y
+        ofPoint frc;            // Force X, Y
+        float particleScale;    // Particle Scale
+        float drag;             // Drag
+        float randomValue;      // Apply to Noise
     
-        ofPoint centerPoint;
-        ofPoint distance;
-        float boundaryRadius;
+        vector <ofPoint> * attractPoints;   // Attract Point
+        ofPoint centerPoint;                // Center of Window
+        ofPoint distance;                   // Distance from Center to Particle
+        float boundaryRadius;               // Radius of Boundary
 
-        float scaledVolume;    
+        float scaledVolume;                 // Volume after Scaled
+        bool grabbed;
     
-        vector <ofPoint> * attractPoints;
-    
+        modeSelection mode;                 // Mode Set
 };
 
 #endif /* defined(__ProjectII__Particles__) */

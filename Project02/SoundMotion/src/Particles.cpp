@@ -33,7 +33,7 @@ void Particles::setup(){
     drag  = ofRandom(0.95, 0.998);
     particleScale = ofRandom(0.5, 1.0);
     
-    boundaryRadius = 375.0;
+    boundaryRadius = 400.0;
 }
 
 //------------------------------------------------------------------
@@ -68,21 +68,8 @@ void Particles::update(float _scaledVolume, ofPoint _centerPoint){
         }
     }
     
-    //---------- 02. DRAG AROUND --------------------//
     
-    else if (mode == MODE_DRAG_AROUND) {
-        
-        ofPoint attractPt(centerPoint.x, centerPoint.y);
-        
-        frc = attractPt-pos;
-        frc.normalize();
-        
-        vel *= drag;
-        vel += frc*0.5;
-    }
-    
-    
-    //---------- 03. SOUND MOTION --------------------//
+    //---------- 02. SOUND MOTION --------------------//
     
     else if (mode == MODE_SOUND_MOTION) {
     
@@ -130,7 +117,7 @@ void Particles::update(float _scaledVolume, ofPoint _centerPoint){
         }
     }
     
-    else if (mode == MODE_DRAG_AROUND || mode == MODE_SOUND_MOTION) {
+    else if (mode == MODE_SOUND_MOTION) {
         distance = pos - centerPoint;
         if ( sqrtf( powf(fabs(distance.x), 2.0) + powf(fabs(distance.y), 2.0) ) > boundaryRadius){
             distance.normalize();

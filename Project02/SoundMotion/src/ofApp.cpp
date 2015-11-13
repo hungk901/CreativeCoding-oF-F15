@@ -101,20 +101,22 @@ void ofApp::draw(){
     ofSetColor(colorR, colorG, colorB);
     for(unsigned int i = 0; i < p.size(); i++){
         p[i].draw();
-    
+            
         if (i+1 < p.size()) {
             ofLine(p[i].pos.x, p[i].pos.y, p[i+1].pos.x, p[i+1].pos.y);
         }
         
         // Last Point connects to the First Point
-        if (i == p.size()) {
-            ofLine(p[i].pos.x, p[i].pos.y, p[0].pos.x, p[0].pos.y);
+        if (i-1 == p.size()) {
+            ofLine(p[i-1].pos.x, p[i-1].pos.y, p[0].pos.x, p[0].pos.y);
         }
     }
     
-    //----- Show String -----//
+    //----- Display String -----//
     ofSetColor(250);
-    ofDrawBitmapString(modeString + "\n\nz | Free Flow - Move your Mouse. \nx | Drag Around - Drag Particles. \nc | Sound Motion - Particles reponse with Sound. \nr | Reset - Reset Current Mode.", 10, 20);
+//    ofDrawBitmapString(modeString + "\n\nz | Free Flow - Move your Mouse. \nx | Drag Around - Drag Particles. \nc | Sound Motion - Particles reponse with Sound. \nr | Reset - Reset Current Mode.", 10, 20);
+    
+    ofDrawBitmapString(modeString + "\n\nz | Free Flow - Move your Mouse. \nx | Sound Motion - Particles reponse with Sound. \nr | Reset - Reset Current Mode.", 10, 20);
 }
 
 //--------------------------------------------------------------
@@ -125,10 +127,6 @@ void ofApp::keyPressed  (int key){
         modeString = "[   Free Flow Mode  ]";
     }
     if( key == 'x' || key == 'X'){
-        setMode = MODE_DRAG_AROUND;
-        modeString = "[  Drag Around Mode ]";
-    }
-    if( key == 'c' || key == 'C'){
         setMode = MODE_SOUND_MOTION;
         modeString = "[ Sound Motion Mode ]";
         audioInput.soundStream.start();
@@ -156,7 +154,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
     
-    if (setMode == MODE_DRAG_AROUND || setMode == MODE_SOUND_MOTION) {
+    if (setMode == MODE_SOUND_MOTION) {
         if (!isGrabbed) {
             isGrabbed = true;
         }

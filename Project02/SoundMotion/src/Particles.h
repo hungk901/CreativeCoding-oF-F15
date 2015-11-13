@@ -14,7 +14,6 @@
 
 enum modeSelection{
     MODE_FREE_FLOW,
-    MODE_DRAG_AROUND,
     MODE_SOUND_MOTION
 };
 

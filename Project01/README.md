@@ -12,10 +12,10 @@ This is my first time doing a project by using openFrameworks, except previous a
 Sometimes I messed up the position things of objects before I understand how to manipulate ofPushstyle, ofPopstyle, ofPushMatrix and ofPopMatrix. Hopefully, I got familiar with these functions gradually and solved the problems.
 
 -----
-* ###How to Switch the Seasons of this app
-	1. Key "z" or "Z" - Switch to Spring,
-	2. Key "x" or "X" - Switch to Summer,
-	3. Key "c" or "C" - Switch to Fall,
+* ####How to Switch the Seasons of this app
+	1. Key "z" or "Z" - Switch to Spring;
+	2. Key "x" or "X" - Switch to Summer;
+	3. Key "c" or "C" - Switch to Fall
 	4. Key "v" or "V" - Switch to Winter.
 	
 -----

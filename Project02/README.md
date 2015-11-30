@@ -15,4 +15,4 @@ Dynamic particles are hard to handle and sometimes losed control. If I do not se
 	
 -----
 ##Demo
-[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/qsscm1yj7xo&feature=youtu.be/0.jpg)](http://www.youtube.com/watch?v=qsscm1yj7xo&feature=youtu.be)
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/qsscm1yj7xo&feature/0.jpg)](http://www.youtube.com/watch?v=qsscm1yj7xo&feature=youtu.be)

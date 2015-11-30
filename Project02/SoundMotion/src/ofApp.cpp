@@ -107,8 +107,8 @@ void ofApp::draw(){
         }
         
         // Last Point connects to the First Point
-        if (i-1 == p.size()) {
-            ofLine(p[i-1].pos.x, p[i-1].pos.y, p[0].pos.x, p[0].pos.y);
+        if (i+1 == p.size()) {
+            ofLine(p[0].pos.x, p[0].pos.y, p[i].pos.x, p[i].pos.y);
         }
     }
     

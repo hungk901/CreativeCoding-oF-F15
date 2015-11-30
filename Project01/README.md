@@ -15,7 +15,7 @@ Sometimes I messed up the position things of objects before I understand how to 
 ####How to Switch the Seasons of this app:
 	1. Key "z" or "Z" - Switch to Spring;
 	2. Key "x" or "X" - Switch to Summer;
-	3. Key "c" or "C" - Switch to Fall
+	3. Key "c" or "C" - Switch to Fall;
 	4. Key "v" or "V" - Switch to Winter.
 	
 -----

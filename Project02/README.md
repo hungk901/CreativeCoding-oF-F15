@@ -1,6 +1,6 @@
 #Project 02
 
-##Sound Motion!
+##Sound Motion - Sound Visualization Project
 
 -----
 * ####Concept
@@ -12,7 +12,15 @@ This time I learn how to make things move and make them like organisms. Also I l
 * ####Challenge I faced
 Dynamic particles are hard to handle and sometimes losed control. If I do not set the parameters in the accurate range, the particles will in a mess. So I spent plenty of time to understand the rules and regular patterns. 
 
-	
+-----
+####How to Control this app:
+	1. Key "z" or "Z" - Switch to Free Flow Mode;
+	2. Key "x" or "X" - Switch to Sound Motion Mode;
+	3. Key "r" or "R" - Reset all Particles of current mode,	
 -----
 ##Demo
+Hint: Click the image below to watch demo video. Please notice that it will lead you to Youtube.
+
 [![image](https://github.com/hungk901/CreativeCoding_oF_F15_KuoJui_Hung/blob/master/Project02/screenshots/pic01.png)](http://www.youtube.com/watch?v=qsscm1yj7xo&feature=youtu.be)
+
+-

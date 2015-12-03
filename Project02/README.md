@@ -4,7 +4,7 @@
 
 -----
 * ####Concept
-For this project, I am creating a Sound Visualization app. I watched some sound visualization projects and were inspired me a lot. Therefore I want and try to build a interactive sound visualization. I use dynamic particles and real-time sound input to trigger the particles. That is, these particles response to the sound. To make this project more interesting, I create two modes. One is Sound Motion Mode which is sound visualization. Another is Free Flow Mode which the mouse swipes the nearby particles. 
+For this project, I am creating a Sound Visualization app. I watched some sound visualization projects and they inspired me a lot. Therefore I want and try to build a interactive sound visualization. I use dynamic particles and real-time sound input to trigger the particles. That is, these particles response to the sound. To make this project more interesting, I create two modes. One is Sound Motion Mode which is sound visualization. Another is Free Flow Mode which the mouse swipes the nearby particles. 
 
 * ####What I learn from this project
 This time I learn how to make things move and make them like organisms. Also I learn how to use and manipulate external source input, like sounds, music. And I combine these two technics to create a sound visaulization.

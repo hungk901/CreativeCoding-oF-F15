@@ -42,7 +42,7 @@ void ofApp::update(){
 
 //    centerPoint.x = mouseX;
 //    centerPoint.y = mouseY;
-
+//
     centerPoint = handCenter;
     
     float frictionFrc;

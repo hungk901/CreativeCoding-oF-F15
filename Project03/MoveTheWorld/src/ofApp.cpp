@@ -39,11 +39,23 @@ void ofApp::update(){
             isAttracted = false;
         }
     }
-
-//    centerPoint.x = mouseX;
-//    centerPoint.y = mouseY;
-//
-    centerPoint = handCenter;
+    
+    
+    /* 
+     Uncommented Mouse Control Mode and commented Leap Motion Mode
+     to activate Mouse Control Mode
+    */
+    
+    // Mouse Control Mode //
+        centerPoint.x = mouseX;
+        centerPoint.y = mouseY;
+    
+    
+    // Leap Motion Mode //
+//    centerPoint = handCenter;
+    
+    /*------------------------------------------------------------*/
+    
     
     float frictionFrc;
     float repulsionFrc;

@@ -11,8 +11,8 @@ void Particle::setup(){
     
     particleSize = 1;
     
-    colorR = ofRandom(100,180);
-    colorG = ofRandom(50,120);
+    colorR = ofRandom(150,250);
+    colorG = ofRandom(75,150);
     colorB = ofRandom(100,200);
 }
 

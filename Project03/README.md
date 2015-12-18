@@ -9,16 +9,17 @@ I am creating another particle system to mess with for this project. The particl
 	`Regina lent her Leap Motion to me! She is so kind!!! Thank you Regina!`
 
 * ####What I learn from this project
-I learn how to make a new particle system with different movement. Also I learn how to use Leap Motion and its addons. 
+I learn how to make a new particle system with different movement. Also I learn how to use Leap Motion and its addons. Leap Motion addon has great examples so it did not take a lot of time to figure how to manipulate the parameters and functions. 
 
 * ####Challenge I faced
-Dynamic particles are hard to handle and sometimes losed control. If I do not set the parameters in the accurate range, the particles will in a mess. So I spent plenty of time to understand the rules and regular patterns. 
+The center of coordinate plane used to start at upper left corner in openFrameworks, but. the examples of Leap Motion change the coordinates plane and put the (0,0) in the center of window. So I spent some time to make (0,0) back to upper left. Moreover, I rescaled the width and height from examples and transformed to default setting. 
 
 -----
 ####How to Control this app:
 	1. Connect your Leap Motion;
 	2. On your computer, launch Leap Motion app and switch to Visualiztion Mode;
-	3. Use your hand to mess with the paritcles!	
+	3. Use your hand to mess with the paritcles!
+	4. Need some hints? Try to make a fist and release!	
 -----
 ##Demo
 Hint: Click the image below to watch demo video. Please notice that it will lead you to Youtube.

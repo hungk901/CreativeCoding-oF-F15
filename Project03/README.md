@@ -15,6 +15,10 @@ I learn how to make a new particle system with different movement. Also I learn 
 The center of coordinate plane used to start at upper left corner in openFrameworks, but. the examples of Leap Motion change the coordinates plane and put the (0,0) in the center of window. So I spent some time to make (0,0) back to upper left. Moreover, I rescaled the width and height from examples and transformed to default setting. 
 
 -----
+####Addons used in this project:
+* [ofxLeapMotion](https://github.com/ofTheo/ofxLeapMotion)
+
+-----
 ####How to Control this app:
 	1. Connect your Leap Motion;
 	2. On your computer, launch Leap Motion app and switch to Visualiztion Mode;
@@ -24,6 +28,14 @@ The center of coordinate plane used to start at upper left corner in openFramewo
 ##Demo
 Hint: Click the image below to watch demo video. Please notice that it will lead you to Youtube.
 
-[![image](https://github.com/hungk901/CreativeCoding_oF_F15_KuoJui_Hung/blob/master/Project03/screenshots/pic01.png)](http://www.youtube.com/watch?v=qsscm1yj7xo&feature=youtu.be)
+[![image](https://github.com/hungk901/CreativeCoding_oF_F15_KuoJui_Hung/blob/master/Project03/screenshots/pic01.png)](https://youtu.be/keo7oMuUwvs?list=PLN3MlRyqIBJWM1LyeHWuvdxzOaYq-4DZ8)
+
+----
+##Screenshots
+![image](https://github.com/hungk901/CreativeCoding_oF_F15_KuoJui_Hung/blob/master/Project03/screenshots/pic02.png)
+
+![image](https://github.com/hungk901/CreativeCoding_oF_F15_KuoJui_Hung/blob/master/Project03/screenshots/pic03.png)
+
+![image](https://github.com/hungk901/CreativeCoding_oF_F15_KuoJui_Hung/blob/master/Project03/screenshots/pic04.png)
 
 -
